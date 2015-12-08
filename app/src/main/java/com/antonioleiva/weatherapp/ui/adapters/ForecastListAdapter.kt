@@ -9,7 +9,7 @@ import com.antonioleiva.weatherapp.domain.model.ForecastList
 import com.antonioleiva.weatherapp.extensions.ctx
 import com.antonioleiva.weatherapp.extensions.toDateString
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.item_forecast.view.*
+import kotlinx.android.synthetic.main.item_forecast.view.*
 import org.jetbrains.anko.layoutInflater
 import org.jetbrains.anko.onClick
 

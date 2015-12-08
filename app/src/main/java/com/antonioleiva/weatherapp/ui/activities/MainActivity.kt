@@ -8,7 +8,7 @@ import com.antonioleiva.weatherapp.R
 import com.antonioleiva.weatherapp.domain.commands.RequestForecastCommand
 import com.antonioleiva.weatherapp.extensions.DelegatesExt
 import com.antonioleiva.weatherapp.ui.adapters.ForecastListAdapter
-import kotlinx.android.synthetic.activity_main.forecastList
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity

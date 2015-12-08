@@ -10,11 +10,8 @@ import com.antonioleiva.weatherapp.domain.model.Forecast
 import com.antonioleiva.weatherapp.extensions.color
 import com.antonioleiva.weatherapp.extensions.toDateString
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.activity_detail.icon
-import kotlinx.android.synthetic.activity_detail.maxTemperature
-import kotlinx.android.synthetic.activity_detail.minTemperature
-import kotlinx.android.synthetic.activity_detail.weatherDescription
 import org.jetbrains.anko.*
+import kotlinx.android.synthetic.main.activity_detail.*
 import java.text.DateFormat
 
 class DetailActivity : AppCompatActivity(), ToolbarManager {
