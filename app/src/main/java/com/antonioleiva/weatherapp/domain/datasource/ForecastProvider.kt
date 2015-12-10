@@ -13,8 +13,8 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
         val SOURCES by lazy { listOf(ForecastDb(), ForecastServer()) }
     }
 
-    fun requestByZipCode(zipCode: Long, days: Int): ForecastList = requestToSources {
-        val res = it.requestForecastByZipCode(zipCode, todayTimeSpan())
+    fun requestById(id: Long, days: Int): ForecastList = requestToSources {
+        val res = it.requestForecastById(id, todayTimeSpan())
         if (res != null && res.size() >= days) res else null
     }
 

@@ -5,7 +5,7 @@ import com.antonioleiva.weatherapp.domain.model.ForecastList
 
 interface ForecastDataSource {
     
-    fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList?
+    fun requestForecastById(id: Long, date: Long): ForecastList?
 
     fun requestDayForecast(id: Long): Forecast?
 

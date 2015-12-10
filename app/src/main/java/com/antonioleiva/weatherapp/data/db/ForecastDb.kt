@@ -11,15 +11,15 @@ import java.util.*
 class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
                  val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
 
-    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+    override fun requestForecastById(id: Long, date: Long) = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
-                .whereSimple(dailyRequest, zipCode.toString(), date.toString())
+                .whereSimple(dailyRequest, id.toString(), date.toString())
                 .parseList { DayForecast(HashMap(it)) }
 
         val city = select(CityForecastTable.NAME)
-                .whereSimple("${CityForecastTable.ID} = ?", zipCode.toString())
+                .whereSimple("${CityForecastTable.ID} = ?", id.toString())
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }
 
         city?.let { dataMapper.convertToDomain(it) }

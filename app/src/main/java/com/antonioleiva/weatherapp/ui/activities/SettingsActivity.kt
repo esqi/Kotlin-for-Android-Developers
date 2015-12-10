@@ -5,29 +5,29 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.antonioleiva.weatherapp.R
 import com.antonioleiva.weatherapp.extensions.DelegatesExt
-import kotlinx.android.synthetic.activity_settings.cityCode
-import kotlinx.android.synthetic.toolbar.toolbar
+import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class SettingsActivity : AppCompatActivity() {
 
     companion object {
-        val ZIP_CODE = "zipCode"
-        val DEFAULT_ZIP = 94043L
+        val ID = "id"
+        val DEFAULT_ID = 1642911L //1650357L
     }
 
-    var zipCode: Long by DelegatesExt.preference(this, ZIP_CODE, DEFAULT_ZIP)
+    var id: Long by DelegatesExt.preference(this, ID, DEFAULT_ID)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         setSupportActionBar(toolbar)
         supportActionBar.setDisplayHomeAsUpEnabled(true)
-        cityCode.setText(zipCode.toString())
+        cityId.setText(id.toString())
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        zipCode = cityCode.text.toString().toLong()
+        if(!cityId.text.isEmpty()) id = cityId.text.toString().toLong()
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

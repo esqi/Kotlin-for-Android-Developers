@@ -16,8 +16,8 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity(), ToolbarManager {
 
-    val zipCode: Long by DelegatesExt.preference(this, SettingsActivity.ZIP_CODE,
-            SettingsActivity.DEFAULT_ZIP)
+    val id: Long by DelegatesExt.preference(this, SettingsActivity.ID,
+            SettingsActivity.DEFAULT_ID)
     override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
     }
 
     private fun loadForecast() = async {
-        val result = RequestForecastCommand(zipCode).execute()
+        val result = RequestForecastCommand(id).execute()
         uiThread {
             val adapter = ForecastListAdapter(result) {
                 startActivity<DetailActivity>(DetailActivity.ID to it.id,

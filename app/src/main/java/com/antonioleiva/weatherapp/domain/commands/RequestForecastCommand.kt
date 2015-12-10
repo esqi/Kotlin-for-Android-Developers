@@ -4,7 +4,7 @@ import com.antonioleiva.weatherapp.domain.datasource.ForecastProvider
 import com.antonioleiva.weatherapp.domain.model.ForecastList
 
 class RequestForecastCommand(
-        val zipCode: Long,
+        val id: Long,
         val forecastProvider: ForecastProvider = ForecastProvider()) :
         Command<ForecastList> {
 
@@ -12,5 +12,5 @@ class RequestForecastCommand(
         val DAYS = 7
     }
 
-    override fun execute() = forecastProvider.requestByZipCode(zipCode, DAYS)
+    override fun execute() = forecastProvider.requestById(id, DAYS)
 }
