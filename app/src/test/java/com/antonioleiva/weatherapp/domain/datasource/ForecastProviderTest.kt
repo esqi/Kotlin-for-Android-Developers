@@ -3,10 +3,8 @@ package com.antonioleiva.weatherapp.domain.datasource
 import com.antonioleiva.weatherapp.domain.model.Forecast
 import com.antonioleiva.weatherapp.domain.model.ForecastList
 import org.junit.Test
+import org.mockito.Mockito.*
 import kotlin.test.assertNotNull
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.any
 
 class ForecastProviderTest {
 
@@ -21,10 +19,10 @@ class ForecastProviderTest {
     @Test fun emptyDatabaseReturnsServerValue() {
         val db = mock(ForecastDataSource::class.java)
         val server = mock(ForecastDataSource::class.java)
-        `when`(server.requestForecastByZipCode(any(Long::class.java), any(Long::class.java)))
+        `when`(server.requestForecastById(any(Long::class.java), any(Long::class.java)))
                 .then { ForecastList(0, "city", "country", listOf()) }
 
         val provider = ForecastProvider(listOf(db, server))
-        assertNotNull(provider.requestByZipCode(0, 0))
+        assertNotNull(provider.requestById(0, 0))
     }
 }

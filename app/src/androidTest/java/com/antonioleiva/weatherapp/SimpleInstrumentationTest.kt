@@ -32,10 +32,10 @@ class SimpleInstrumentationTest {
     @Test fun modifyZipCode_changesToolbarTitle() {
         openActionBarOverflowOrOptionsMenu(activityRule.activity)
         onView(withText(R.string.settings)).perform(click())
-        onView(withId(R.id.cityCode)).perform(replaceText("28830"))
+        onView(withId(R.id.cityId)).perform(replaceText("1650357"))
         pressBack()
         onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(`is`("San Fernando de Henares (ES)"))))
+                .check(matches(withToolbarTitle(`is`("Bandung (ID)"))))
     }
 
     private fun withToolbarTitle(textMatcher: Matcher<CharSequence>): Matcher<Any> =
