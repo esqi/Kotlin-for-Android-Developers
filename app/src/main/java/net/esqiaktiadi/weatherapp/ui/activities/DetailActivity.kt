@@ -2,21 +2,23 @@ package net.esqiaktiadi.weatherapp.ui.activities;
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.toolbar.*
 import net.esqiaktiadi.weatherapp.R
 import net.esqiaktiadi.weatherapp.domain.commands.RequestDayForecastCommand
 import net.esqiaktiadi.weatherapp.domain.model.Forecast
 import net.esqiaktiadi.weatherapp.extensions.color
 import net.esqiaktiadi.weatherapp.extensions.toDateString
-import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
-import kotlinx.android.synthetic.main.activity_detail.*
 import java.text.DateFormat
 
-class DetailActivity : AppCompatActivity(), ToolbarManager {
+class DetailActivity : AppCompatActivity() {
 
-    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
+//    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
     companion object {
         val ID = "DetailActivity:id"
@@ -26,10 +28,13 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail)
-        initToolbar()
+//        initToolbar()
+        setSupportActionBar(toolbar)
 
-        toolbarTitle = intent.getStringExtra(CITY_NAME)
-        enableHomeAsUp { onBackPressed() }
+//        toolbarTitle = intent.getStringExtra(CITY_NAME)
+        supportActionBar.title = intent.getStringExtra(CITY_NAME)
+//        enableHomeAsUp { onBackPressed() }
+        supportActionBar.setDisplayHomeAsUpEnabled(true)
 
         async {
             val result = RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute()
@@ -51,5 +56,20 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
             in 0..15 -> android.R.color.holo_orange_dark
             else -> android.R.color.holo_green_dark
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean  = when(item.itemId){
+        R.id.action_settings -> {startActivity<SettingsActivity>();true}
+        android.R.id.home -> {
+            onBackPressed()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }
